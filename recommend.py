@@ -17,12 +17,33 @@ def recomm_movie_by_surprise(algo, userId, unseen_item, item, top_n=10):
     # 아이템 아이디, 제목, 예측 평점 출력
     print(f"Top-{top_n} 추천 아이템 리스트")
 
+    # 버전1***********************************
+    dic = {}
 
+    i = 0
     for pred in top_predictions:
+        name = "itemName"+str(i)
 
         movie_id = int(float(pred.iid))
         movie_title = item[item["itemId"] == movie_id]["title"].tolist()
         movie_rating = pred.est
-
         
-        print(f"{movie_title}: {movie_rating:.2f}")
+        dic[name] = movie_title[0]
+        i += 1
+
+        # print(f"{movie_title}: {movie_rating:.2f}")
+
+
+    #버전2***********************************
+    # dic = {'itemName':[]}
+
+    # for pred in top_predictions:
+
+    #     movie_id = int(float(pred.iid))
+    #     movie_title = item[item["itemId"] == movie_id]["title"].tolist()
+    #     movie_rating = pred.est
+    #     dic['itemName'].append(movie_title[0])
+        
+    #     # print(f"{movie_title}: {movie_rating:.2f}")
+
+    print(dic)
