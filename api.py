@@ -1,21 +1,23 @@
 from typing import Union
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Header
 
 import ai
+import jwt_service
 
 app = FastAPI()
 
 
 @app.get("/")
-def read_root():
+def read_root(authorization: Union[str, None] = Header(default=None)):
+    jwt_service.get_id_from_jwt(authorization)
     return {"Hello": "World"}
 
 
 @app.get("/recommend")
 def read_item():
     result = ai.recomm_items()
-    return {"result": result}
+    return result
 
 
 

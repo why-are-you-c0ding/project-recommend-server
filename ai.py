@@ -8,7 +8,7 @@ from surprise.dataset import DatasetAutoFolds
 from surprise import SVD
 
 def recomm_items():
-    conn = pymysql.connect(host='localhost', user='root', password='', db='ai_db', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='an06270711', db='ai_db', charset='utf8')
     cur = conn.cursor()
 
 
@@ -40,7 +40,7 @@ def recomm_items():
     reader = Reader(line_format='user item rating timestamp', sep=',', rating_scale=(0.5, 5))
 
     # DatasetAutoFolds 객체 생성
-    data_folds = DatasetAutoFolds(ratings_file='/Users/kwon-ohhyun/Downloads/ItemRatings_noh.csv', reader=reader)
+    data_folds = DatasetAutoFolds(ratings_file='C:\\Users\\asb07\\Desktop\\ItemRatings_noh.csv', reader=reader)
 
     # 전체 데이터를 train으로 지정
     trainset = data_folds.build_full_trainset()

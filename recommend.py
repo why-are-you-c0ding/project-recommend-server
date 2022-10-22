@@ -21,29 +21,31 @@ def recomm_movie_by_surprise(algo, userId, unseen_item, item, top_n=10):
     dic = {}
 
     i = 0
-    for pred in top_predictions:
-        name = "itemName"+str(i)
+    # for pred in top_predictions:
+    #     name = "itemName"+str(i)
 
-        movie_id = int(float(pred.iid))
-        movie_title = item[item["itemId"] == movie_id]["title"].tolist()
-        movie_rating = pred.est
+    #     movie_id = int(float(pred.iid))
+    #     movie_title = item[item["itemId"] == movie_id]["title"].tolist()
+    #     movie_rating = pred.est
         
-        dic[name] = movie_title[0]
-        i += 1
+    #     dic[name] = movie_title[0]
+    #     i += 1
+    # return dic;
 
         # print(f"{movie_title}: {movie_rating:.2f}")
 
 
     #버전2***********************************
-    # dic = {'itemName':[]}
+    dic = {'itemName':[]}
 
-    # for pred in top_predictions:
+    for pred in top_predictions:
 
-    #     movie_id = int(float(pred.iid))
-    #     movie_title = item[item["itemId"] == movie_id]["title"].tolist()
-    #     movie_rating = pred.est
-    #     dic['itemName'].append(movie_title[0])
+        movie_id = int(float(pred.iid))
+        movie_title = item[item["itemId"] == movie_id]["title"].tolist()
+        movie_rating = pred.est
+        dic['itemName'].append(movie_title[0])
         
-    #     # print(f"{movie_title}: {movie_rating:.2f}")
+        # print(f"{movie_title}: {movie_rating:.2f}")
+    return dic;
 
     print(dic)
