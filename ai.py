@@ -3,12 +3,14 @@ import pandas as pd
 import unseen
 import recommend
 
+import secret
+
 from surprise import Reader
 from surprise.dataset import DatasetAutoFolds
 from surprise import SVD
 
 def recomm_items():
-    conn = pymysql.connect(host='localhost', user='root', password='an06270711', db='ai_db', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password=secret.PASSWORD, db='ai_db', charset='utf8')
     cur = conn.cursor()
 
 

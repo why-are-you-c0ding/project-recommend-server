@@ -15,7 +15,7 @@ def recomm_movie_by_surprise(algo, userId, unseen_item, item, top_n=10):
     top_predictions = predictions[:top_n]
 
     # 아이템 아이디, 제목, 예측 평점 출력
-    print(f"Top-{top_n} 추천 아이템 리스트")
+    # print(f"Top-{top_n} 추천 아이템 리스트")
 
     # 버전1***********************************
     dic = {}
@@ -47,5 +47,3 @@ def recomm_movie_by_surprise(algo, userId, unseen_item, item, top_n=10):
         
         # print(f"{movie_title}: {movie_rating:.2f}")
     return dic;
-
-    print(dic)

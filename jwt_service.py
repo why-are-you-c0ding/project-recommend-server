@@ -1,13 +1,14 @@
-import jwt
-
-from jwt.algorithms import get_default_algorithms
-
+from jose import jwt
+import base64
+import math
+import secret
 
 def get_id_from_jwt(token):
-    result = token.split(' ');
-    #print(result)
-    print(result[1])
-    get_default_algorithms()
-    id = jwt.decode(result[1], '109ejaovnlxnvqaiofqwjeofjmdslknvbubnqwpofjlsknvmxn013i419ur8iufghjoidf812374iuyewhfi92hids', algorithms='HS512')
-    print(id)
+    result = token.split(' ')
+    key = secret.SECRET_KEY
+
+    code = key.ljust((int)(math.ceil(len(key) / 4)) * 4, '=')
+
+    id = jwt.decode(result[1], base64.b64decode(code), algorithms=['HS256'])
+    return id
 

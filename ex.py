@@ -1,6 +1,6 @@
 import pymysql
 import pandas as pd
-conn = pymysql.connect(host='localhost', user='root', password='an06270711', db='ai_db', charset='utf8')
+conn = pymysql.connect(host='localhost', user='root', password='1234', db='ai_db', charset='utf8')
 cur = conn.cursor()
 
 
