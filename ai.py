@@ -42,7 +42,7 @@ def recomm_items():
     reader = Reader(line_format='user item rating timestamp', sep=',', rating_scale=(0.5, 5))
 
     # DatasetAutoFolds 객체 생성
-    data_folds = DatasetAutoFolds(ratings_file='C:\\Users\\asb07\\Desktop\\ItemRatings_noh.csv', reader=reader)
+    data_folds = DatasetAutoFolds(ratings_file=secret.FILE_PATH, reader=reader)
 
     # 전체 데이터를 train으로 지정
     trainset = data_folds.build_full_trainset()
