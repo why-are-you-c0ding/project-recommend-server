@@ -8,14 +8,9 @@ import jwt_service
 app = FastAPI()
 
 
-@app.get("/")
-def read_root(authorization: Union[str, None] = Header(default=None)):
-    id = jwt_service.get_id_from_jwt(authorization)
-    return {"Hello": id}
-
-
 @app.get("/recommend")
-def read_item():
+def read_item(authorization: Union[str, None] = Header(default=None)):
+    id = jwt_service.get_id_from_jwt(authorization)
     result = ai.recomm_items()
     return result
 

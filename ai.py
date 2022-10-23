@@ -14,12 +14,12 @@ def recomm_items():
     cur = conn.cursor()
 
 
-    sql1 = "select * from item_ratings;"
+    sql1 = "select item_id, rating, timestamp, user_id from item_rating"
     cur.execute(sql1)
 
     rat = cur.fetchall()
 
-    sql2 = "select * from items2;"
+    sql2 = "select genres, item_id, title from item;"
     cur.execute(sql2)
 
     items2 = cur.fetchall()
@@ -27,7 +27,7 @@ def recomm_items():
 
     ratList = []
     for i in rat:
-        ratList.append({'userId':i[4], 'itemId':i[1], 'rating':i[2], 'tiemstamp':i[3] })
+        ratList.append({'userId':i[3], 'itemId':i[0], 'rating':i[1], 'tiemstamp':i[2] })
 
     del ratList[0]
 
@@ -36,7 +36,7 @@ def recomm_items():
 
     itemsList = []
     for i in items2:
-        itemsList.append({'itemId':i[2], 'title':i[3],'category':i[1] })
+        itemsList.append({'itemId':i[1], 'title':i[2],'category':i[0] })
 
     item = pd.DataFrame(itemsList)
     reader = Reader(line_format='user item rating timestamp', sep=',', rating_scale=(0.5, 5))
