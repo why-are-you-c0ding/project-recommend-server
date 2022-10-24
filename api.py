@@ -1,11 +1,14 @@
 from typing import Union
-
 from fastapi import FastAPI, Header
+from pydantic import BaseModel
 
 import ai
 import jwt_service
 
 app = FastAPI()
+
+class Item(BaseModel):
+    name: str
 
 
 @app.get("/recommend")
@@ -13,6 +16,14 @@ def read_item(authorization: Union[str, None] = Header(default=None)):
     user_id = jwt_service.get_id_from_jwt(authorization)
     result = ai.recomm_items(user_id)
     return result
+
+
+@app.post("/recommend")
+async def create_item_rating(item:Item, authorization: Union[str, None] = Header(default=None)):
+    user_id = jwt_service.get_id_from_jwt(authorization)
+    print(item.name, user_id)
+
+
 
 
 

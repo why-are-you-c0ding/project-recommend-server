@@ -59,7 +59,7 @@ def recomm_items(user_id):
     #pred = algo.predict(uid, iid, verbose=True)
 
 
-    unseen_item = unseen.get_unseen_surprise(ratings, item, 9)
+    unseen_item = unseen.get_unseen_surprise(ratings, item, user_id)
 
     return recommend.recomm_movie_by_surprise(algo, user_id, unseen_item, item, top_n=10)
 
