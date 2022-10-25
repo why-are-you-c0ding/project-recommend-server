@@ -129,4 +129,4 @@ def recomm_movie_by_surprise(algo, userId, unseen_item, top_n=10):
         print(f"{movie_title}: {movie_rating:.2f}")
 
 
-recomm_movie_by_surprise(algo, 3, unseen_item, top_n=10)
+recomm_movie_by_surprise(algo, 3, unseen_item, top_n=5)

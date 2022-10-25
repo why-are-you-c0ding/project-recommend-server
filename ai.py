@@ -64,7 +64,7 @@ def recomm_items(user_id):
 
     unseen_item = unseen.get_unseen_surprise(ratings, item, user_id)
 
-    return recommend.recomm_movie_by_surprise(algo, user_id, unseen_item, item, top_n=10)
+    return recommend.recomm_movie_by_surprise(algo, user_id, unseen_item, item, top_n=5)
 
 def track_user_behavior(rating, item_id, token):
     conn = pymysql.connect(host='localhost', user='root', password=secret.PASSWORD, db='ai_db', charset='utf8')
