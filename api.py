@@ -1,11 +1,24 @@
 from typing import Union
 from fastapi import FastAPI, Header
 from pydantic import BaseModel
+from starlette.middleware.cors import CORSMiddleware
 
 import ai
 import jwt_service
 
+origins = [
+    "http://localhost:3090",
+]
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Item(BaseModel):
     item_id: int
