@@ -1,3 +1,4 @@
+
 import pymysql
 import pandas as pd
 import unseen
@@ -5,6 +6,8 @@ import recommend
 
 import secret
 
+import time
+from datetime import datetime
 from surprise import Reader
 from surprise.dataset import DatasetAutoFolds
 from surprise import SVD
@@ -63,6 +66,20 @@ def recomm_items(user_id):
 
     return recommend.recomm_movie_by_surprise(algo, user_id, unseen_item, item, top_n=10)
 
+def track_user_behavior(rating, item_id, token):
+    conn = pymysql.connect(host='localhost', user='root', password=secret.PASSWORD, db='ai_db', charset='utf8')
+    cur = conn.cursor()
+    
+    query = "insert into item_rating (item_id, rating, timestamp, user_id) values (%s, %s, %s, %s)"
+    cur.execute(query,(item_id, rating, time.time(), token['id'] ))
+    conn.commit()
+    conn.close()
+    
+
+# item_id   | bigint | YES  |     | NULL    |                |
+# | rating    | double | YES  |     | NULL    |                |
+# | timestamp | bigint | YES  |     | NULL    |                |
+# | user_id
 
 
 

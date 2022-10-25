@@ -8,7 +8,8 @@ import jwt_service
 app = FastAPI()
 
 class Item(BaseModel):
-    name: str
+    item_id: int
+    rating: float
 
 
 @app.get("/recommend")
@@ -20,8 +21,9 @@ def read_item(authorization: Union[str, None] = Header(default=None)):
 
 @app.post("/recommend")
 async def create_item_rating(item:Item, authorization: Union[str, None] = Header(default=None)):
-    user_id = jwt_service.get_id_from_jwt(authorization)
-    print(item.name, user_id)
+    token = jwt_service.get_id_from_jwt(authorization)
+    ai.track_user_behavior(item.rating, item.item_id, token)
+    return {"message" : "요청을 성공했습니다."}
 
 
 
